@@ -34,7 +34,7 @@ test_requirements = [
 ]
 
 setup(
-	name='expan',
+	name='expan_folked',
 	version=version,
 	description="Experiment Analysis Library",
 	long_description=readme + '\n\n' + history,
