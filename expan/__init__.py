@@ -4,9 +4,9 @@ from __future__ import absolute_import
 
 import logging.config
 
-from expan.core import *
-from expan.core.version import __version__
-from expan.data import *
+from core import *
+from core.version import __version__
+from data import *
 
 __all__ = ["core", "data"]
 logging.basicConfig(level=logging.DEBUG)
