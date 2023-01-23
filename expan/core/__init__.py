@@ -3,7 +3,7 @@
 
 from __future__ import absolute_import
 
-from .version import __version__, version
+from version import __version__, version
 
 __all__ = ["binning", "early_stopping", "experiment", "statistics", "util",
            "version", "results", "correction", "statistical_test"]

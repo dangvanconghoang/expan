@@ -4,7 +4,7 @@ from __future__ import absolute_import
 
 import logging.config
 
-from .core import *
+from core import *
 from .core.version import __version__
 from .data import *
 

@@ -5,11 +5,11 @@ import numpy as np
 import pandas as pd
 import copy
 
-import expan.core.early_stopping as es
-import expan.core.statistics as statx
-import expan.core.correction as correction
-from expan.core.statistical_test import *
-from expan.core.results import StatisticalTestResult, MultipleTestSuiteResult, CombinedTestStatistics
+import early_stopping as es
+import statistics as statx
+import correction as correction
+from statistical_test import *
+from results import StatisticalTestResult, MultipleTestSuiteResult, CombinedTestStatistics
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 logger = logging.getLogger(__name__)
@@ -230,7 +230,7 @@ class Experiment(object):
                 raise ValueError("Threshold type needs to be either 'upper', 'lower', or 'two-sided'.")
 
             # check if provided percentile is valid
-            if 0.0 < percentile <= 100.0 is False:
+            if (0.0 < percentile) & (percentile <= 100.0):
                 raise ValueError("Percentile value needs to be between 0.0 and 100.0!")
 
         # run quantile filtering

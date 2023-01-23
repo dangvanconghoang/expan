@@ -8,7 +8,7 @@ from os.path import dirname, join, realpath
 import pandas as pd
 import numpy as np
 
-# from pystan import StanModel
+from pystan import StanModel
 # import stan
 
 from scipy.stats import gaussian_kde, norm, cauchy
@@ -423,10 +423,10 @@ def get_or_compile_stan_model(model_file, distribution):
 
     if os.path.isfile(compiled_model_file):
         sm = pickle.load(open(compiled_model_file, 'rb'))
-    # else:
-    #     # sm = StanModel(file=model_file)
-    #     sm = stan.build(model_file, random_seed=1)
+    else:
+        sm = StanModel(file=model_file)
+        # sm = stan.build(model_file, random_seed=1)
 
-    #     with open(compiled_model_file, 'wb') as f:
-    #         pickle.dump(sm, f)
+        with open(compiled_model_file, 'wb') as f:
+            pickle.dump(sm, f)
     return sm

@@ -6,7 +6,7 @@ from heapq import heapify, heappush, heappop
 
 import numpy as np
 
-from expan.core.util import is_nan
+from util import is_nan
 
 logger = logging.getLogger(__name__)
 
