@@ -7,12 +7,15 @@ from os.path import dirname, join, realpath
 
 import pandas as pd
 import numpy as np
-from pystan import StanModel
+
+# from pystan import StanModel
+# import stan
+
 from scipy.stats import gaussian_kde, norm, cauchy
 
-import expan.core.statistics as statx
-from expan.core.util import drop_nan
-from expan.core.results import BaseTestStatistics, SampleStatistics, EarlyStoppingTestStatistics
+import statistics as statx
+from util import drop_nan
+from results import BaseTestStatistics, SampleStatistics, EarlyStoppingTestStatistics
 
 __location__ = realpath(join(os.getcwd(), dirname(__file__)))
 logger = logging.getLogger(__name__)
@@ -411,7 +414,7 @@ def get_or_compile_stan_model(model_file, distribution):
 
     logger.info("Started loading and compiling Stan model for {} distribution".format(distribution))
 
-    if distribution is not 'normal' and distribution is not 'poisson':
+    if distribution != 'normal' and distribution != 'poisson':
         raise ValueError("Model " + distribution + " is not implemented.")
 
     python_version = '{0[0]}.{0[1]}'.format(sys.version_info)
@@ -420,8 +423,10 @@ def get_or_compile_stan_model(model_file, distribution):
 
     if os.path.isfile(compiled_model_file):
         sm = pickle.load(open(compiled_model_file, 'rb'))
-    else:
-        sm = StanModel(file=model_file)
-        with open(compiled_model_file, 'wb') as f:
-            pickle.dump(sm, f)
+    # else:
+    #     # sm = StanModel(file=model_file)
+    #     sm = stan.build(model_file, random_seed=1)
+
+    #     with open(compiled_model_file, 'wb') as f:
+    #         pickle.dump(sm, f)
     return sm
