@@ -13,11 +13,12 @@ try:
 except OSError:
 	requirements = []
 
-with open('README.rst') as readme_file:
-	readme = readme_file.read(encoding="utf8")
+# with open('README.rst') as readme_file:
+# 	readme = readme_file.read(encoding="utf8")
 
-with open('CHANGELOG.rst') as history_file:
-	history = history_file.read()
+# with open('CHANGELOG.rst' , 'r') as history_file:
+# 	# history = open(history_file)
+# 	history = history_file.read()
 
 with open('expan/core/version.py', 'r') as fd:
 	version = re.search(
@@ -37,7 +38,7 @@ setup(
 	name='expan',
 	version=version,
 	description="Experiment Analysis Library",
-	long_description=readme + '\n\n' + history,
+	# long_description=readme + '\n\n' + history,
 	author="Zalando SE",
 	author_email='octopus@zalando.de',
 	url='https://github.com/zalando/expan',
