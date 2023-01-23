@@ -12,8 +12,8 @@ logger = logging.getLogger(__name__)
 class JsonSerializable(object):
     """ Interface for serializable classes."""
     def toJson(self):
-        return json.dumps(self, default=lambda o: o.name if isinstance(o, Enum) else o.__dict__, sort_keys=True, indent=4)
-
+        # return json.dumps(self, default=lambda o: o.name if isinstance(o, Enum) else o.__dict__, sort_keys=True, indent=4)
+        return self.toJSON()
     def __repr__(self):
         return self.toJson()
 
