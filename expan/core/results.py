@@ -1,5 +1,5 @@
-from statistical_test import CorrectionMethod
-from util import JsonSerializable
+from .statistical_test import CorrectionMethod
+from .util import JsonSerializable
 
 
 # --------- Below are the data structure of statistics --------- #

@@ -11,9 +11,17 @@ logger = logging.getLogger(__name__)
 
 class JsonSerializable(object):
     """ Interface for serializable classes."""
+    print('dont print_variable')
+    # def dumper(self):
+    #     try:
+    #         return self.toJSON()
+    #     except:
+    #         return string(self)
+
     def toJson(self):
-        # return json.dumps(self, default=lambda o: o.name if isinstance(o, Enum) else o.__dict__, sort_keys=True, indent=4)
-        return self.toJSON()
+        return json.dumps(self, default=lambda o: o.name if isinstance(o, Enum) else o.__dict__, sort_keys=True, indent=4)
+        # return json.dumps(self,sort_keys=True,default=self.dumper(), indent=4)        
+
     def __repr__(self):
         return self.toJson()
 

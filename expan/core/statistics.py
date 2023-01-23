@@ -6,7 +6,7 @@ import logging
 import numpy as np
 import pandas as pd
 import scipy
-from results import BaseTestStatistics, SampleStatistics, SimpleTestStatistics
+from .results import BaseTestStatistics, SampleStatistics, SimpleTestStatistics
 
 logger = logging.getLogger(__name__)
 

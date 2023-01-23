@@ -14,8 +14,9 @@ from pystan import StanModel
 from scipy.stats import gaussian_kde, norm, cauchy
 
 import statistics as statx
-from util import drop_nan
-from results import BaseTestStatistics, SampleStatistics, EarlyStoppingTestStatistics
+from .statistics import sample_size,normal_difference,compute_p_value_from_samples,compute_statistical_power_from_samples
+from .util import drop_nan
+from .results import BaseTestStatistics, SampleStatistics, EarlyStoppingTestStatistics
 
 __location__ = realpath(join(os.getcwd(), dirname(__file__)))
 logger = logging.getLogger(__name__)
@@ -85,8 +86,8 @@ def group_sequential(x, y, spending_function='obrien_fleming', estimated_sample_
     _x = np.array(x, dtype=float)
     _y = np.array(y, dtype=float)
 
-    n_x = statx.sample_size(_x)
-    n_y = statx.sample_size(_y)
+    n_x = sample_size(_x)
+    n_y = sample_size(_y)
 
     if not estimated_sample_size:
         information_fraction = 1.0
@@ -117,14 +118,14 @@ def group_sequential(x, y, spending_function='obrien_fleming', estimated_sample_
     else:
         stop = False
 
-    interval = statx.normal_difference(mu_x, sigma_x, n_x, mu_y, sigma_y, n_y,
+    interval = normal_difference(mu_x, sigma_x, n_x, mu_y, sigma_y, n_y,
                                        [alpha_new * 100 / 2, 100 - alpha_new * 100 / 2])
 
     treatment_statistics = SampleStatistics(int(n_x), float(np.nanmean(_x)), float(np.nanvar(_x)))
     control_statistics   = SampleStatistics(int(n_y), float(np.nanmean(_y)), float(np.nanvar(_y)))
     variant_statistics   = BaseTestStatistics(control_statistics, treatment_statistics)
-    p_value              = statx.compute_p_value_from_samples(_x, _y)
-    statistical_power    = statx.compute_statistical_power_from_samples(_x, _y, alpha)
+    p_value              = compute_p_value_from_samples(_x, _y)
+    statistical_power    = compute_statistical_power_from_samples(_x, _y, alpha)
 
     logger.info("Finished running group sequential early stopping; spending function is {}, size of treatment is {} "
                 "and size of control is {}".format(spending_function, len(x), len(y)))
@@ -201,8 +202,8 @@ def _bayes_sampling(x, y, distribution='normal', num_iters=25000, inference="sam
 
     mu_x = np.nanmean(_x)
     mu_y = np.nanmean(_y)
-    n_x = statx.sample_size(_x)
-    n_y = statx.sample_size(_y)
+    n_x = sample_size(_x)
+    n_y = sample_size(_y)
 
     if distribution == 'normal':
         fit_data = {'Nc': n_y,

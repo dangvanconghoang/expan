@@ -5,11 +5,11 @@ import numpy as np
 import pandas as pd
 import copy
 
-import early_stopping as es
-import statistics as statx
-import correction as correction
-from statistical_test import *
-from results import StatisticalTestResult, MultipleTestSuiteResult, CombinedTestStatistics
+from . import early_stopping as es
+from . import statistics as statx
+from . import correction as correction
+from .statistical_test import *
+from .results import StatisticalTestResult, MultipleTestSuiteResult, CombinedTestStatistics
 
 warnings.filterwarnings("ignore", category=FutureWarning)
 logger = logging.getLogger(__name__)

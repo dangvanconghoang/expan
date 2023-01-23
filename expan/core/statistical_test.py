@@ -1,7 +1,7 @@
 from enum import Enum
 
 import pandas as pd
-from util import JsonSerializable
+from .util import JsonSerializable
 
 from copy import deepcopy
 
